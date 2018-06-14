@@ -64,15 +64,15 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 
     // get input from user
     var input = document.querySelector('.final-score').value;
-    var winningScore;
+
     // Undefined, 0, null or "" are COERCED to false
     if(input){
-      winningScore = input;
+      var winningScore = input;
     } else {
       winningScore = 100;
     }
     // Check if the active player won the game
-    if ( scores[activePlayer] >= winningScore ) {
+    if ( scores[activePlayer] >= 100 ) {
 
       // update ui to show the winner
       document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
