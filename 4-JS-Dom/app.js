@@ -10,7 +10,7 @@ GAME RULES:
 */
 
 // declaring vars
-var scores, roundScore, activePlayer, gamePlaying, lastDice;
+var scores, roundScore, activePlayer, gamePlaying;
 
 initializeGame();
 
@@ -20,27 +20,20 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
   // only run if the game is playing
   if ( gamePlaying ) {
     // get random number
-    var dice = Math.floor( Math.random() * 6 ) + 1;
+    var dice1 = Math.floor( Math.random() * 6 ) + 1;
+    var dice2 = Math.floor( Math.random() * 6 ) + 1;
+
 
     // set a variable to a query selector
-    var diceDOM = document.querySelector('.dice')
+    document.getElementById('dice-1').style.display = 'block';
+    document.getElementById('dice-2').style.display = 'block';
+    document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';
+    document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';
 
-    // using set variable we are updating the display style of the element
-    diceDOM.style.display = 'block';
-
-    // using the var we are updating the image that is being srced by the element
-    diceDOM.src = 'dice-' + dice + '.png';
-
-    if ( dice === 6 && lastDice ) {
-      // Player looses score
-      scores[activePlayer] = 0;
-      document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-      nextPlayer();
-    }
-    // update the round score if the rolled number was NOT a 1
-    else if ( dice !== 1 ) {
+    if ( dice1 !== 1  && dice2 !== 1 ) {
       // add the score
-      roundScore += dice;
+      roundScore += dice1;
+      roundScore += dice2;
 
       // set the score in the html
       document.querySelector('#current-' + activePlayer).textContent = roundScore;
@@ -49,8 +42,6 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
       nextPlayer();
 
     }
-
-    lastDice = dice;
   }
 });
 
@@ -78,7 +69,9 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
       document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
 
       // hide dice
-      document.querySelector('.dice').style.display = 'none';
+      document.getElementById('dice-1').style.display = 'none';
+      document.getElementById('dice-2').style.display = 'none';
+
 
       //
       document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -103,7 +96,8 @@ function initializeGame() {
   roundScore = 0;
 
   // example of changing a css attribute
-  document.querySelector('.dice').style.display = 'none';
+  document.getElementById('dice-1').style.display = 'none';
+  document.getElementById('dice-2').style.display = 'none';
 
   // !!!!! Events and Event Handling !!!!!!!
 
@@ -143,6 +137,7 @@ function nextPlayer() {
   document.querySelector('.player-1-panel').classList.toggle('active');
 
 
-  document.querySelector('.dice').style.display = 'none';
+  document.getElementById('dice-1').style.display = 'none';
+  document.getElementById('dice-2').style.display = 'none';
 
 }
