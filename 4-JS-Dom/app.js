@@ -10,7 +10,7 @@ GAME RULES:
 */
 
 // declaring vars
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, lastDice;
 
 initializeGame();
 
@@ -31,8 +31,14 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     // using the var we are updating the image that is being srced by the element
     diceDOM.src = 'dice-' + dice + '.png';
 
+    if ( dice === 6 && lastDice ) {
+      // Player looses score
+      scores[activePlayer] = 0;
+      document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+      nextPlayer();
+    }
     // update the round score if the rolled number was NOT a 1
-    if ( dice !== 1 ) {
+    else if ( dice !== 1 ) {
       // add the score
       roundScore += dice;
 
@@ -44,7 +50,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
     }
 
-
+    lastDice = dice;
   }
 });
 
