@@ -19,6 +19,8 @@ Person.prototype.calculateAge = function() {
   console.log(2016 - this.yearOfBirth);
 }
 
+Person.prototype.lastName = 'Smith';
+
 
 // creating a brand new EMPTY object **this happens because of the _new_ operator**
 var john = new Person('John', 1990, 'teacher');
@@ -32,3 +34,6 @@ jane.calculateAge();
 var mark = new Person('Mark', 1948, 'retired');
 mark.calculateAge();
 
+console.log(john.lastName);
+console.log(jane.lastName);
+console.log(mark.lastName);
